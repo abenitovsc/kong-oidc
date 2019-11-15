@@ -58,6 +58,7 @@ function M.get_options(config, ngx)
     filters = parseFilters(config.filters),
     logout_path = config.logout_path,
     redirect_after_logout_uri = config.redirect_after_logout_uri,
+    roles = config.roles
   }
 end
 
@@ -92,6 +93,15 @@ function M.has_bearer_access_token()
     if string.lower(header:sub(0, divider-1)) == string.lower("Bearer") then
       return true
     end
+  end
+  return false
+end
+
+function existScopeInRoles(roles, scopes)
+  for k,v in pairs(roles) do
+    for x,i in pairs(scopes) do
+      if v == i then return true end
+      end
   end
   return false
 end

@@ -30,6 +30,9 @@ function handle(oidcConfig)
   if oidcConfig.introspection_endpoint then
     response = introspect(oidcConfig)
     if response then
+      if oidcConfig.roles then
+        authorize(oidcConfig.roles, response.scope)
+        end
       utils.injectUser(response)
     end
   end
@@ -77,6 +80,15 @@ function introspect(oidcConfig)
     return res
   end
   return nil
+end
+
+function authorize(roles, scopes)
+  ngx.log(ngx.DEBUG, "Comparing API roles with user scopes: " .. roles)
+
+  if utils.existScopeInRoles(roles, scopes) == false then
+    ngx.log(ngx.INFO, "User is not authorized, scopes: " .. scopes)
+    utils.exit(ngx.HTTP_FORBIDDEN, "Forbiddennn", ngx.HTTP_FORBIDDEN)
+  end
 end
 
 
