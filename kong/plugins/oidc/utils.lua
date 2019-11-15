@@ -98,7 +98,8 @@ function M.has_bearer_access_token()
 end
 
 function M.existScopeInRoles(roles, scopes)
-  for k,v in pairs(split(roles,",")) do
+  rolesArray = split(roles,",")
+  for k,v in pairs(rolesArray) do
     scopesArray = split(scopes, " ")
     for x,i in pairs(scopesArray) do
       if v == i then return true end
