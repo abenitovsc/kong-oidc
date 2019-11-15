@@ -98,9 +98,9 @@ function M.has_bearer_access_token()
 end
 
 function M.existScopeInRoles(roles, scopes)
-  rolesArray = split(roles,",")
+  local rolesArray = split(roles,",")
   for k,v in pairs(rolesArray) do
-    scopesArray = split(scopes, " ")
+    local scopesArray = split(scopes, " ")
     for x,i in pairs(scopesArray) do
       if v == i then return true end
       end
@@ -109,7 +109,7 @@ function M.existScopeInRoles(roles, scopes)
 end
 
 function split(s, delimiter)
-  result = {};
+  local result = {};
   for match in (s..delimiter):gmatch("(.-)"..delimiter) do
     table.insert(result, match);
   end
