@@ -97,13 +97,22 @@ function M.has_bearer_access_token()
   return false
 end
 
-function existScopeInRoles(roles, scopes)
+function M.existScopeInRoles(roles, scopes)
   for k,v in pairs(roles) do
-    for x,i in pairs(scopes) do
+    scopesArray = split(scopes, " ")
+    for x,i in pairs(scopesArray) do
       if v == i then return true end
       end
   end
   return false
+end
+
+function split(s, delimiter)
+  result = {};
+  for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+    table.insert(result, match);
+  end
+  return result;
 end
 
 return M

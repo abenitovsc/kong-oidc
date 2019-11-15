@@ -83,7 +83,8 @@ function introspect(oidcConfig)
 end
 
 function authorize(roles, scopes)
-  ngx.log(ngx.DEBUG, "Comparing API roles with user scopes: " .. roles)
+  ngx.log(ngx.DEBUG, "Comparing API roles with user scopes. Roles:" .. roles)
+  ngx.log(ngx.DEBUG, "User scopes:" .. scopes)
 
   if utils.existScopeInRoles(roles, scopes) == false then
     ngx.log(ngx.INFO, "User is not authorized, scopes: " .. scopes)
