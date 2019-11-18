@@ -97,11 +97,10 @@ function M.has_bearer_access_token()
   return false
 end
 
-function M.existScopeInRoles(roles, scopes)
+function M.existScopeInRoles(roles, userRoles)
   local rolesArray = split(roles,",")
   for k,v in pairs(rolesArray) do
-    local scopesArray = split(scopes, " ")
-    for x,i in pairs(scopesArray) do
+    for x,i in pairs(userRoles) do
       if v == i then return true end
       end
   end
