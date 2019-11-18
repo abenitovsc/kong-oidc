@@ -84,7 +84,6 @@ end
 
 function authorize(roles, userRoles, username)
   ngx.log(ngx.DEBUG, "Comparing API roles with user scopes. Roles:" .. roles)
-  ngx.log(ngx.DEBUG, "User roles:" .. userRoles)
 
   if utils.existScopeInRoles(roles, userRoles) == false then
     ngx.log(ngx.INFO, "User " .. username .. " is not authorized, scopes: " .. scopes)
