@@ -98,6 +98,9 @@ function M.has_bearer_access_token()
 end
 
 function M.existScopeInRoles(roles, userRoles)
+  if(userRoles == nil) then
+    return false
+  end
   local rolesArray = split(roles,",")
   for k,v in pairs(rolesArray) do
     for x,i in pairs(userRoles) do
