@@ -186,3 +186,48 @@ To tear the environment down:
 ```
 ./bin/teardown-env.sh
 ```
+
+## Upgrade from fork, authorization
+
+This plugin has been updated to provide client authorization. Allowed roles are defined in the configuration plugin with "config.roles",
+ this field must contain a list of 1-N roles separated by comma. All of these roles will be compared with the user roles provided in the introspection service response, retrieving a 403 HTTP code 
+ if they aren't contained.
+ 
+ Kong plugin config:
+  ```
+..
+..
+ config.roles: role1,role2,role3
+..
+..
+ ```
+ ```
+{
+    "jti": "1e14467a-d3aa-4ca9-907b-a0fa144dc515",
+    "exp": 1574112806,
+    "nbf": 0,
+    "iat": 1574076806,
+    "iss": "http://singular-idp.auth-services.svc/auth/realms/singular",
+    "sub": "9878676d-e42f-4aa0-a3da-07222628f9ff",
+    "typ": "Bearer",
+    "azp": "public",
+    "auth_time": 0,
+    "session_state": "3c3fc969-ee22-4cf7-bce5-0d2caa226b10",
+    "name": "testy19",
+    "given_name": "testy19",
+    "family_name": "",
+    "preferred_username": "testy19@gmail.com",
+    "email": "testy19@gmail.com",
+    "email_verified": false,
+    "acr": "1",
+    "scope": "email profile",
+    "roles": [
+        "role2"
+    ],
+    "client_id": "public",
+    "username": "testy19@gmail.com",
+    "active": true
+}
+```
+
+
